@@ -1,0 +1,212 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-image: url("images/sky.jpg");
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    align-items: center;
+    height: 100vh;
+}
+
+input.search {
+    color: rgb(32, 32, 32);
+    font-size: 1rem;
+    padding: 15px;
+    border-radius: 30px;
+    box-shadow: 0 0 15px rgb(41, 41, 41);
+    outline: none;
+    border: none;
+    background: none;
+    backdrop-filter: blur(20px);
+    background-color: rgba(255, 255, 255, 0.8);
+    font-weight: 700;
+    text-align: center;
+}
+
+::placeholder {
+    color: black;
+    opacity: 0.7;
+  }
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+.top {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 15px rgb(41, 41, 41);
+}
+
+.top > h1 {
+    color: white;
+}
+
+.card {
+    color: white;
+    width: 90%;
+    max-width: 500px;
+    padding: 40px;
+    border-radius: 30px;
+    background-color: rgba(0,0,0, 0.5);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 15px rgb(41, 41, 41);
+    display: flex;
+    flex-direction: column;
+}
+
+.city {
+    font-size: 2rem;
+    font-weight: 900;
+    text-align: center;
+}
+
+.temperature {
+    font-size: 10rem;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+}
+
+.bigger-index {
+    font-size: 1.5rem;
+    position: relative;
+    bottom: 25px;
+}
+
+.smaller-index {
+    font-size: 0.9rem;
+    position: relative;
+}
+
+.temperature {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.values {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 30px;
+}
+
+.pair {
+    display: flex;
+    width: 200px;
+}
+
+.pair > .name {
+    margin-right: auto;
+}
+
+.pair > .name + div {
+    align-self: flex-start;
+}
+
+.switch-label {
+    margin-top: 20px;
+    align-self: center;
+    font-size: 0.8rem;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 28px;
+    align-self: center;
+}
+
+.switch input { 
+opacity: 0;
+width: 0;
+height: 0;
+}
+  
+.header {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+}
+
+.slider {
+position: absolute;
+cursor: pointer;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: rgba(255, 255, 255, 0.5);
+backdrop-filter: blur(20px);
+-webkit-transition: .4s;
+transition: .4s;
+}
+  
+.slider:before {
+position: absolute;
+content: "";
+height: 20px;
+width: 20px;
+left: 4px;
+bottom: 4px;
+background-color: white;
+-webkit-transition: .4s;
+transition: .4s;
+}
+
+input:checked + .slider {
+background-color: rgb(181, 102, 255);
+backdrop-filter: blur(20px);
+}
+
+input:focus + .slider {
+box-shadow: 0 0 15px rgb(41, 41, 41);
+}
+
+input:checked + .slider:before {
+-webkit-transform: translateX(20px);
+-ms-transform: translateX(20px);
+transform: translateX(20px);
+}
+
+.slider.round {
+border-radius: 34px;
+}
+
+.slider.round:before {
+border-radius: 50%;
+}
+
+.footer {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 15px rgb(41, 41, 41);
+    height: 30px;
+    margin-top: auto;
+    color: white;
+    font-size: 0.8rem;
+}
