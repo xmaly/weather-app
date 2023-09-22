@@ -71,14 +71,10 @@ const displayData = (data) => {
     var wind = document.querySelector(".wind-value");
 
     city.textContent = `${data.city}, ${data.country}`;
-    temperature.innerHTML = `${data.temperature.c}<span class="bigger-index"><sup>°${unit}</sup></span>`;
     humidity.textContent = `${data.humidity}%`
     condition.textContent = data.condition;
-    feelsLike.innerHTML = `${data.feelsLike.c}<span class="smaller-index"><sup> °${unit}</sup></span>`;
     wind.textContent = `${data.wind} kph`;
-}
 
-const updateUnits = (myData) => {
     if (unit == 'F') {
         temperature.innerHTML = `${myData.temperature.f}<span class="bigger-index"><sup>°${unit}</sup></span>`;
         feelsLike.innerHTML = `${myData.feelsLike.f}<span class="smaller-index"><sup> °${unit}</sup></span>`;
