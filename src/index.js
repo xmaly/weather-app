@@ -5,19 +5,41 @@ const inputSearch = document.querySelector("input.search");
 inputSearch.addEventListener("keyup", (e) => {
     if (e.keyCode === 13) {
         e.preventDefault();
-        callWeatherApi(inputSearch.value);
+        handleSearch(inputSearch.value);
+        inputSearch.value = "";
     }
 });
 
+const handleSearch = (value) => {
+    callWeatherApi(value).then(data => {
+        if (data) {
+            myData = processJson(data);
+            displayData(myData);
+        }
+    }).catch(error => console.log(error));
+}
+
 const callWeatherApi = async (location) => {
+    const errorMsg = document.querySelector(".error-msg");
+
     const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=2cb54fa1ffff4f8ebdf154631232009&q=${location}`, {mode: 'cors'});
+    if (!response.ok) {
+        errorMsg.style.opacity = "1";
+        errorMsg.innerHTML = `Given city wasn't found.`;
+        return null;
+    }
+    errorMsg.style.opacity = "0";
+    errorMsg.innerHTML = "";
     const data = await response.json();
-    myData = processJson(data);
-    displayData(myData);
+    
     return data;
 };
 
 const processJson = (json) => {
+    if (!json) {
+        return;
+    }
+
     const location = json["location"];
     const current = json["current"];
 
@@ -33,7 +55,8 @@ const processJson = (json) => {
             c: Math.round(current["feelslike_c"]),
             f: Math.round(current["feelslike_f"])
         },
-        humidity: current["humidity"]
+        humidity: current["humidity"],
+        wind: current["wind_kph"]
     }
 
     return myData; 
@@ -55,9 +78,6 @@ const displayData = (data) => {
     wind.textContent = `${data.wind} kph`;
 }
 
-callWeatherApi("Brno").then(result => {
-}).catch(error => console.log(error));
-
 const updateUnits = (myData) => {
     if (unit == 'F') {
         temperature.innerHTML = `${myData.temperature.f}<span class="bigger-index"><sup>°${unit}</sup></span>`;
@@ -76,6 +96,7 @@ temperatureToggle.addEventListener("click", () => {
     } else {
         unit = 'C';
     }
-
     displayData(myData);
 });
+
+handleSearch("Brno");

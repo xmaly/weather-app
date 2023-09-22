@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WeatherApp</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon.png">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +19,10 @@
         <h1>Weather App</h1>
     </div>
 
-    <input class="search" placeholder="Enter a city name..."></input>
+    <div class="search-section">
+        <input class="search" placeholder="Enter a city name..."></input>
+        <div class="error-msg"></div>
+    </div>
 
     <div class="card">
         <div class="header">
@@ -51,9 +55,6 @@
             <span class="slider round"></span>
         </label>
     </div>
-
     <div class="footer">2023 © Jakub Malý</div>
-
-    
 </body>
 </html>

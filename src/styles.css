@@ -15,6 +15,13 @@ body {
     height: 100vh;
 }
 
+.search-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
 input.search {
     color: rgb(32, 32, 32);
     font-size: 1rem;
@@ -28,6 +35,16 @@ input.search {
     background-color: rgba(255, 255, 255, 0.8);
     font-weight: 700;
     text-align: center;
+}
+
+.error-msg {
+    color: white;
+    background-color: rgba(230, 0, 0, 0.7);
+    backdrop-filter: blur(20px);
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    opacity: 0;
 }
 
 ::placeholder {
