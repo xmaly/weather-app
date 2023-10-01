@@ -1,98 +1,142 @@
-var myData = "";
-var unit = 'C';
-const inputSearch = document.querySelector("input.search");
-
-inputSearch.addEventListener("keyup", (e) => {
-    if (e.keyCode === 13) {
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+var _this = this;
+var myData = undefined;
+var unit = "C";
+var inputSearch = document.querySelector("input.search");
+inputSearch === null || inputSearch === void 0 ? void 0 : inputSearch.addEventListener("keyup", function (e) {
+    if (e.key === "Enter") {
         e.preventDefault();
         handleSearch(inputSearch.value);
         inputSearch.value = "";
     }
 });
-
-const handleSearch = (value) => {
-    callWeatherApi(value).then(data => {
+var handleSearch = function (value) {
+    callWeatherApi(value)
+        .then(function (data) {
         if (data) {
             myData = processJson(data);
-            displayData(myData);
+            if (myData) {
+                displayData(myData);
+            }
         }
-    }).catch(error => console.log(error));
-}
-
-const callWeatherApi = async (location) => {
-    const errorMsg = document.querySelector(".error-msg");
-
-    const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=2cb54fa1ffff4f8ebdf154631232009&q=${location}`, {mode: 'cors'});
-    if (!response.ok) {
-        errorMsg.style.opacity = "1";
-        errorMsg.innerHTML = `Given city wasn't found.`;
-        return null;
-    }
-    errorMsg.style.opacity = "0";
-    errorMsg.innerHTML = "";
-    const data = await response.json();
-    
-    return data;
+    })
+        .catch(function (error) { return console.log(error); });
 };
-
-const processJson = (json) => {
+var callWeatherApi = function (location) { return __awaiter(_this, void 0, void 0, function () {
+    var errorMsg, response, data;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                errorMsg = document.querySelector(".error-msg");
+                if (!errorMsg) {
+                    console.error("Error message element not found");
+                    return [2 /*return*/, null];
+                }
+                return [4 /*yield*/, fetch("https://api.weatherapi.com/v1/current.json?key=2cb54fa1ffff4f8ebdf154631232009&q=".concat(location), { mode: "cors" })];
+            case 1:
+                response = _a.sent();
+                if (!response.ok) {
+                    errorMsg.style.opacity = "1";
+                    errorMsg.innerHTML = "Given city wasn't found.";
+                    return [2 /*return*/, null];
+                }
+                errorMsg.style.opacity = "0";
+                errorMsg.innerHTML = "";
+                return [4 /*yield*/, response.json()];
+            case 2:
+                data = _a.sent();
+                return [2 /*return*/, data];
+        }
+    });
+}); };
+var processJson = function (json) {
     if (!json) {
         return;
     }
-
-    const location = json["location"];
-    const current = json["current"];
-
-    const myData = {
+    var location = json["location"];
+    var current = json["current"];
+    var myData = {
         condition: current["condition"]["text"],
         city: location["name"],
         country: location["country"],
         temperature: {
             c: Math.round(current["temp_c"]),
-            f: Math.round(current["temp_f"])
+            f: Math.round(current["temp_f"]),
         },
         feelsLike: {
             c: Math.round(current["feelslike_c"]),
-            f: Math.round(current["feelslike_f"])
+            f: Math.round(current["feelslike_f"]),
         },
         humidity: current["humidity"],
-        wind: current["wind_kph"]
-    }
-
-    return myData; 
+        wind: current["wind_kph"],
+    };
+    return myData;
 };
-
-const displayData = (data) => {
+var displayData = function (data) {
     var city = document.querySelector(".city");
     var temperature = document.querySelector(".temperature");
     var humidity = document.querySelector(".humidity-value");
     var condition = document.querySelector(".condition");
     var feelsLike = document.querySelector(".feels-like-value");
     var wind = document.querySelector(".wind-value");
-
-    city.textContent = `${data.city}, ${data.country}`;
-    humidity.textContent = `${data.humidity}%`
+    if (!city || !temperature || !humidity || !condition || !feelsLike || !wind) {
+        console.error("One or more elements not found");
+        return;
+    }
+    city.textContent = "".concat(data.city, ", ").concat(data.country);
+    humidity.textContent = "".concat(data.humidity, "%");
     condition.textContent = data.condition;
-    wind.textContent = `${data.wind} kph`;
-
-    if (unit == 'F') {
-        temperature.innerHTML = `${myData.temperature.f}<span class="bigger-index"><sup>°${unit}</sup></span>`;
-        feelsLike.innerHTML = `${myData.feelsLike.f}<span class="smaller-index"><sup> °${unit}</sup></span>`;
-    } else {
-        temperature.innerHTML = `${myData.temperature.c}<span class="bigger-index"><sup>°${unit}</sup></span>`;
-        feelsLike.innerHTML = `${myData.feelsLike.c}<span class="smaller-index"><sup> °${unit}</sup></span>`;
-    }
-}
-
+    wind.textContent = "".concat(data.wind, " kph");
+    var temperatureValue = unit === "F" ? data.temperature.f : data.temperature.c;
+    var feelsLikeValue = unit === "F" ? data.feelsLike.f : data.feelsLike.c;
+    temperature.innerHTML = "".concat(temperatureValue, "<span class=\"bigger-index\"><sup>\u00B0").concat(unit, "</sup></span>");
+    feelsLike.innerHTML = "".concat(feelsLikeValue, "<span class=\"smaller-index\"><sup> \u00B0").concat(unit, "</sup></span>");
+};
 var temperatureToggle = document.querySelector("#temperature-toggle");
-
-temperatureToggle.addEventListener("click", () => {
-    if (temperatureToggle.checked) {
-        unit = 'F';
-    } else {
-        unit = 'C';
+temperatureToggle === null || temperatureToggle === void 0 ? void 0 : temperatureToggle.addEventListener("click", function () {
+    if (temperatureToggle === null || temperatureToggle === void 0 ? void 0 : temperatureToggle.checked) {
+        unit = "F";
     }
-    displayData(myData);
+    else {
+        unit = "C";
+    }
+    if (myData) {
+        displayData(myData);
+    }
 });
-
 handleSearch("Brno");
