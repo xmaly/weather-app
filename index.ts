@@ -88,7 +88,7 @@ const processJson = (json: WeatherApiData) => {
   const location = json["location"];
   const current = json["current"];
 
-  const myData = {
+  myData = {
     condition: current["condition"]["text"],
     city: location["name"],
     country: location["country"],
